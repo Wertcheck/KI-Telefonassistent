@@ -26,3 +26,8 @@ npm run qa      # Playwright-QA → artifacts/qa/telvo/ (PLAYWRIGHT_PATH setzen,
 | `integrations.verified` | alle Anbieter gelten als „mögliche Integrationsziele“ |
 | `images.industries.*`, `images.howto` | neutraler Platzhalter statt Foto |
 | `siteUrl` | Canonical / absolute Open-Graph-Bild-URL |
+
+## Deployment (GitHub Pages)
+`.github/workflows/pages.yml` baut bei jedem Push auf `main` bzw. den Default-Branch und veröffentlicht `dist/`.
+Einmalig nötig: *Settings → Pages → Source: GitHub Actions*. Der Basispfad (`/KI-Telefonassistent`) wird per `BASE_PATH` gesetzt; lokal bleibt er leer.
+Bei eigener Domain: `siteUrl` in `site.config.mjs` setzen und `BASE_PATH` im Workflow leeren.

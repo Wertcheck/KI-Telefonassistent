@@ -16,6 +16,10 @@ c.images.hero = await check(c.images.hero);
 c.images.howto = await check(c.images.howto);
 for (const k of Object.keys(c.images.industries)) c.images.industries[k] = await check(c.images.industries[k]);
 
+// Basispfad für Projekt-Seiten (GitHub Pages: /<repo>); lokal leer.
+const base = (process.env.BASE_PATH || '').replace(/\/$/, '');
+const rebase = (html) => html.replace(/(href|src)="\/(?!\/)/g, `$1="${base}/`);
+
 const abs = (p) => (c.siteUrl ? c.siteUrl.replace(/\/$/, '') + p : p);
 const head = ({ title, description, path: pth = '/', noindex = false, og = true }) => `<!doctype html>
 <html lang="${c.lang}">
@@ -65,11 +69,11 @@ await mkdir(dist, { recursive: true });
 await cp(path.join(root, 'public'), dist, { recursive: true });
 const css = [];
 for (const f of ['tokens', 'base', 'components', 'sections', 'responsive']) css.push(await readFile(path.join(root, 'src/styles', `${f}.css`), 'utf8'));
-await writeFile(path.join(dist, 'styles.css'), css.join('\n'));
+await writeFile(path.join(dist, 'styles.css'), css.join('\n').replaceAll('url(/fonts/', `url(${base}/fonts/`));
 await cp(path.join(root, 'src/js/main.js'), path.join(dist, 'main.js'));
-await writeFile(path.join(dist, 'index.html'), home);
-await writeFile(path.join(dist, 'impressum.html'), legal('impressum', 'Impressum'));
-await writeFile(path.join(dist, 'datenschutz.html'), legal('datenschutz', 'Datenschutzerklärung'));
-await writeFile(path.join(dist, 'agb.html'), legal('agb', 'Allgemeine Geschäftsbedingungen'));
+await writeFile(path.join(dist, 'index.html'), rebase(home));
+await writeFile(path.join(dist, 'impressum.html'), rebase(legal('impressum', 'Impressum')));
+await writeFile(path.join(dist, 'datenschutz.html'), rebase(legal('datenschutz', 'Datenschutzerklärung')));
+await writeFile(path.join(dist, 'agb.html'), rebase(legal('agb', 'Allgemeine Geschäftsbedingungen')));
 await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n${c.siteUrl ? `Sitemap: ${c.siteUrl}/sitemap.xml\n` : ''}`);
 console.log('Build fertig →', path.relative(root, dist), '| Bilder:', c.images.hero ? 'Hero ok' : 'Hero fehlt');
