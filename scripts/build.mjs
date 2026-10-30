@@ -1,6 +1,7 @@
 import { mkdir, rm, cp, readFile, writeFile, readdir, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import config from '../site.config.mjs';
 import { esc } from '../src/components/ui.mjs';
 import * as S from '../src/components/sections.mjs';
@@ -75,9 +76,13 @@ const css = [];
 for (const f of ['tokens', 'base', 'components', 'sections', 'responsive']) css.push(await readFile(path.join(root, 'src/styles', `${f}.css`), 'utf8'));
 await writeFile(path.join(dist, 'styles.css'), css.join('\n').replaceAll('url(/fonts/', `url(${base}/fonts/`));
 await cp(path.join(root, 'src/js/main.js'), path.join(dist, 'main.js'));
-await writeFile(path.join(dist, 'index.html'), rebase(home));
-await writeFile(path.join(dist, 'impressum.html'), rebase(legal('impressum', 'Impressum')));
-await writeFile(path.join(dist, 'datenschutz.html'), rebase(legal('datenschutz', 'Datenschutzerklärung')));
-await writeFile(path.join(dist, 'agb.html'), rebase(legal('agb', 'Allgemeine Geschäftsbedingungen')));
+// Cache-Busting: Inhalts-Hash an CSS/JS, damit neue Deployments sofort greifen.
+const js = await readFile(path.join(root, 'src/js/main.js'), 'utf8');
+const v = createHash('sha1').update(css.join('') + js).digest('hex').slice(0, 8);
+const ver = (html) => html.replace('href="/styles.css"', `href="/styles.css?v=${v}"`).replace('src="/main.js"', `src="/main.js?v=${v}"`);
+await writeFile(path.join(dist, 'index.html'), rebase(ver(home)));
+await writeFile(path.join(dist, 'impressum.html'), rebase(ver(legal('impressum', 'Impressum'))));
+await writeFile(path.join(dist, 'datenschutz.html'), rebase(ver(legal('datenschutz', 'Datenschutzerklärung'))));
+await writeFile(path.join(dist, 'agb.html'), rebase(ver(legal('agb', 'Allgemeine Geschäftsbedingungen'))));
 await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n${c.siteUrl ? `Sitemap: ${c.siteUrl}/sitemap.xml\n` : ''}`);
 console.log('Build fertig →', path.relative(root, dist), '| Bilder:', c.images.hero ? 'Hero ok' : 'Hero fehlt');
