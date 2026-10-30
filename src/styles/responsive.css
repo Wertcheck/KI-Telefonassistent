@@ -1,0 +1,61 @@
+@media (max-width:1100px){
+  .nav ul{gap:1.4rem}
+  .hero__grid{grid-template-columns:1fr}
+  .hero__copy .lead{max-width:38rem}
+  .hero__visual{max-width:46rem;margin-inline:auto;width:100%}
+  .callcard{left:-1rem}
+  .footer__grid{grid-template-columns:repeat(3,1fr)}
+  .footer__brand{grid-column:1/-1}
+  .how__grid{grid-template-columns:1fr}
+  .how__img{min-height:0;height:clamp(14rem,40vw,24rem);aspect-ratio:auto}
+  .demo__grid{grid-template-columns:1fr auto}
+  .checks{grid-column:1/-1;grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .nav,.header__cta{display:none}
+  .menu-toggle{display:grid}
+  .header__actions{margin-left:auto}
+  .features__grid{grid-template-columns:repeat(2,1fr);gap:2.5rem 0}
+  .feature:nth-child(3){border-left:0;padding-left:0}
+  .split-head{grid-template-columns:1fr;gap:1rem;align-items:start}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .plans{grid-template-columns:1fr;max-width:34rem;margin-inline:auto}
+  .plan--featured{transform:none;order:-1}
+  .integ__grid{grid-template-columns:repeat(2,1fr)}
+  .faq__grid{grid-template-columns:1fr}
+  .faq__intro{position:static}
+  .steps{grid-template-columns:1fr;gap:1.75rem}
+  .demo__grid{grid-template-columns:1fr}
+  .phone{order:2}
+  .checks{order:3;grid-template-columns:1fr}
+  .final__inner{justify-content:flex-start}
+  .final__botanic{opacity:.18;left:auto;right:-4rem}
+}
+@media (max-width:640px){
+  :root{--header-h:68px}
+  .logo__word{font-size:1.65rem}
+  .hero{padding-top:1rem}
+  .hero__cta .btn{width:100%}
+  .hero__photo{aspect-ratio:4/3}
+  .hero__photo img{object-position:70% 40%}
+  .hero__visual{padding-bottom:0}
+  .callcard{position:relative;left:auto;margin:-3rem 1rem 0;width:auto;animation:none}
+  .statuscards{position:static;margin:1rem 0 0;gap:.5rem}
+  .statuscards li{min-width:0}
+  .strip ul{justify-content:flex-start;gap:.5rem 1.5rem}
+  .features__grid{grid-template-columns:1fr;gap:2rem}
+  .feature,.feature:nth-child(3){padding:0 0 2rem;border-left:0;border-bottom:1px solid var(--line)}
+  .feature:last-child{border-bottom:0;padding-bottom:0}
+  .cards{grid-template-columns:1fr}
+  .integ__grid{grid-template-columns:1fr}
+  .stack,.final .stack{flex-direction:column;align-items:stretch}
+  .stack .btn{width:100%}
+  .acc__panel{padding-right:.25rem}
+  .footer__grid{grid-template-columns:1fr 1fr}
+  .dialog{padding:1.5rem 1.25rem}
+  .phone__frame{width:min(17.5rem,100%)}
+}
+@media (max-width:380px){.footer__grid{grid-template-columns:1fr}}
+.hero__grid>*,.how__grid>*,.demo__grid>*,.faq__grid>*,.split-head>*{min-width:0}
+@media (max-width:900px){.demo__grid,.how__grid,.faq__grid,.split-head{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:1100px){.how__grid{grid-template-columns:minmax(0,1fr)}}

@@ -1,0 +1,13 @@
+{
+  "name": "telvo-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Telvo – KI-Telefonassistent. Statische Website ohne Laufzeit-Abhängigkeiten.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "qa": "node scripts/qa.mjs"
+  }
+}
