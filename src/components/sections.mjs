@@ -50,7 +50,12 @@ export const hero = (c) => `
     <div class="hero__copy">
       <p class="eyebrow">KI, die für Sie ans Telefon geht</p>
       <h1 id="hero-title" class="h1">Mehr Zeit für das&nbsp;Wesentliche.</h1>
-      <p class="lead">Unser KI-Telefonassistent nimmt Anrufe professionell entgegen, beantwortet Fragen, vereinbart Termine und erfasst Kundenanliegen – zuverlässig und in Ihrer individuellen Unternehmenssprache.</p>
+      <ul class="bullets">
+        <li>Nimmt Anrufe professionell entgegen</li>
+        <li>Beantwortet Fragen zu Ihrem Unternehmen</li>
+        <li>Vereinbart Termine und erfasst Kundenanliegen</li>
+        <li>Zuverlässig und in Ihrer individuellen Unternehmenssprache</li>
+      </ul>
       <div class="hero__cta">${demoCall(c)}${demoListen(c)}</div>
       <ul class="trust">${c.trust.map((t) => `<li>${icon('check')}${esc(t)}</li>`).join('')}</ul>
     </div>

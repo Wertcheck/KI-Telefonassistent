@@ -42,7 +42,7 @@
   .hero__photo img{object-position:68% 35%}
   .hero__copy{order:1}
   .hero__copy .h1{font-size:clamp(2.35rem,10.5vw,3rem);margin-bottom:1.1rem}
-  .hero__copy .lead{margin-bottom:1.5rem}
+  .bullets{margin-bottom:1.5rem}
   .hero__cta .btn{width:100%}
   .callcard{order:2;position:relative;left:auto;bottom:auto;width:auto;margin:0;animation:none}
   .statuscards{order:3;position:static;margin:0;gap:.5rem}
