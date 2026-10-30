@@ -50,6 +50,7 @@ export default {
   images: {
     hero: {
       src: '/images/hero-callcenter.webp',
+      srcset: '/images/hero-callcenter-800.webp 800w, /images/hero-callcenter.webp 1600w',
       width: 1600,
       height: 899,
       alt: 'Freundliche Mitarbeiterin mit Headset an einem modernen Arbeitsplatz im Callcenter, auf den Monitoren Telvo-Gesprächs- und Kundeninformationen',

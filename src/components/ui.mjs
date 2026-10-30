@@ -68,7 +68,7 @@ export const picture = (img, { phIcon = 'headset', loading = 'lazy', sizes = '10
   if (!img)
     return `<div class="ph ${cls}" role="img" aria-label="Bild folgt">${icon(phIcon)}</div>`;
   const pos = img.position ? ` style="object-position:${img.position}"` : '';
-  return `<img class="${cls}" src="${esc(img.src)}" width="${img.width}" height="${img.height}" alt="${esc(img.alt)}" sizes="${sizes}" ${eager ? 'fetchpriority="high"' : `loading="${loading}"`} decoding="async"${pos}>`;
+  return `<img class="${cls}" src="${esc(img.src)}"${img.srcset ? ` srcset="${esc(img.srcset)}"` : ''} width="${img.width}" height="${img.height}" alt="${esc(img.alt)}" sizes="${sizes}" ${eager ? 'fetchpriority="high"' : `loading="${loading}"`} decoding="async"${pos}>`;
 };
 
 export const sectionHead = ({ eyebrow, title, text, id, dark = false, align = '' }) =>

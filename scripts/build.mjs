@@ -18,7 +18,10 @@ for (const k of Object.keys(c.images.industries)) c.images.industries[k] = await
 
 // Basispfad für Projekt-Seiten (GitHub Pages: /<repo>); lokal leer.
 const base = (process.env.BASE_PATH || '').replace(/\/$/, '');
-const rebase = (html) => html.replace(/(href|src)="\/(?!\/)/g, `$1="${base}/`);
+const rebase = (html) =>
+  html
+    .replace(/(href|src)="\/(?!\/)/g, `$1="${base}/`)
+    .replace(/srcset="([^"]+)"/g, (_, v) => `srcset="${v.replace(/(^|, )\//g, `$1${base}/`)}"`);
 
 const abs = (p) => (c.siteUrl ? c.siteUrl.replace(/\/$/, '') + p : p);
 const head = ({ title, description, path: pth = '/', noindex = false, og = true }) => `<!doctype html>
@@ -38,6 +41,7 @@ ${og && c.images.hero ? `<meta property="og:image" content="${esc(abs(c.images.h
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-serif-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+${c.images.hero ? `<link rel="preload" as="image" href="${esc(c.images.hero.src)}" imagesrcset="${esc(c.images.hero.srcset || '')}" imagesizes="(min-width:1100px) 600px, 100vw" fetchpriority="high">` : ''}
 <link rel="stylesheet" href="/styles.css">
 </head>`;
 

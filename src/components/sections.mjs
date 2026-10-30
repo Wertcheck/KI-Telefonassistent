@@ -56,7 +56,7 @@ export const hero = (c) => `
     </div>
     <div class="hero__visual">
       <figure class="hero__photo">
-        ${picture(c.images.hero, { eager: true, sizes: '(min-width:1024px) 62vw, 100vw', phIcon: 'headset' })}
+        ${picture(c.images.hero, { eager: true, sizes: '(min-width:1100px) 600px, 100vw', phIcon: 'headset' })}
       </figure>
       <div class="callcard" role="group" aria-label="Beispielansicht: Telvo-Telefonie-Oberfläche">
         <div class="callcard__top">
